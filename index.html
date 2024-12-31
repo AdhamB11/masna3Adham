@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مصنع ابناء الكحيلي</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Main Content -->
+    <div class="container">
+        <header class="main-header">
+            <h1><i class="fas fa-calculator"></i> مصنع ابناء الكحيلي</h1>
+            <p class="subtitle">أدخل المقاسات للحصول على التكلفة الإجمالية</p>
+        </header>
+
+        <main class="main-content">
+            <div class="card">
+                <!-- Customer Information -->
+                <section class="customer-section">
+                    <h3><i class="fas fa-user"></i> بيانات العميل</h3>
+                    <div class="form-group">
+                        <label for="customerName" class="form-label">اسم العميل:</label>
+                        <input type="text" id="customerName" class="form-input" placeholder="أدخل اسم العميل" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="customerPhone" class="form-label">رقم الهاتف:</label>
+                        <input type="tel" id="customerPhone" class="form-input" placeholder="أدخل رقم الهاتف">
+                    </div>
+                </section>
+
+                <!-- Measurements Input -->
+                <section class="input-section">
+                    <div class="form-group">
+                        <div class="table-container">
+                            <table id="inputTable" class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>العدد</th>
+                                        <th>نوع المنتج</th>
+                                        <th>العرض (سم)</th>
+                                        <th>الطول (سم)</th>
+                                        <th>مصنعيات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                            
+                        </div>
+                        <button onclick="addNewRow()" class="btn-add-row">
+                            <i class="fas fa-plus"></i> إضافة صف جديد
+                        </button>
+                    </div>
+                    <!-- منتجات بالقطعة -->
+                    <div class="card">
+                        <h3><i class="fas fa-box"></i>مصنعيات </h3>
+                        <div class="table-container">
+                            <table id="unitProductsTable" class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>العدد</th>
+                                        <th>نوع المنتج</th>
+                                        <th>حذف</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button onclick="addNewUnitRow()" class="btn-add-row">
+                            <i class="fas fa-plus"></i> إضافة منتج بالقطعة
+                        </button>
+                    </div>
+
+                    <div class="form-group">
+                        <button onclick="calculateCost()" class="btn-calculate">
+                            <i class="fas fa-calculator"></i> حساب التكلفة
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Results Section -->
+                <section class="result-section">
+                    <h3><i class="fas fa-receipt"></i> النتائج</h3>
+                    <div id="result" class="result-container"></div>
+                    <button id="previewInvoice" onclick="previewInvoice()" class="btn-preview">
+                        <i class="fas fa-eye"></i> معاينة الفاتورة
+                    </button>
+                </section>
+            </div>
+        </main>
+
+        <footer class="main-footer">
+            <p>أدهم بسباس</p>
+        </footer>
+    </div>
+
+    <!-- Overlay -->
+    <div id="overlay" class="overlay" onclick="closeInvoice()"></div>
+
+    <!-- Invoice Template -->
+    <div id="invoice" class="invoice-template">
+        <div class="invoice-header">
+            <h2>مصنع ابناء الكحيلي</h2>
+            <div class="invoice-details">
+                <p>التاريخ: <span id="invoiceDate"></span></p>
+                <p>رقم الفاتورة: <span id="invoiceNumber"></span></p>
+            </div>
+        </div>
+        <div class="customer-details">
+            <p>اسم العميل: <span id="invoiceCustomerName"></span></p>
+            <p>رقم الهاتف: <span id="invoiceCustomerPhone"></span></p>
+        </div>
+        <div id="invoiceItems"></div>
+        <div id="invoiceResults"></div>
+        <div class="invoice-actions">
+            <button onclick="printInvoice()" class="btn-print">
+                <i class="fas fa-print"></i> طباعة
+            </button>
+            <button onclick="closeInvoice()" class="btn-close">
+                <i class="fas fa-times"></i> إغلاق
+            </button>
+        </div>
+        <div class="invoice-footer">
+            <p>شكراً لتعاملكم معنا</p>
+            <p>أدهم بسباس</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
